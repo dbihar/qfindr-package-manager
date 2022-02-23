@@ -1,0 +1,108 @@
+{
+  "name": "zazu-package-manager",
+  "blocks": {
+    "external": [
+      {
+        "id": "Cache Packages",
+        "type": "ServiceScript",
+        "script": "src/refresh.js",
+        "interval": 1800000,
+        "interval.comment": "30_minutes"
+      }
+    ],
+    "input": [
+      {
+        "id": "InstallSearch",
+        "type": "PrefixScript",
+        "prefix": "install",
+        "space": true,
+        "args": "Required",
+        "script": "src/install.js",
+        "connections": ["InstallPlugin", "GotoRepo"]
+      },
+      {
+        "id": "InstallDirect",
+        "type": "PrefixScript",
+        "prefix": "install",
+        "space": true,
+        "args": "Required",
+        "script": "src/installDirect.js",
+        "connections": ["InstallPlugin", "GotoRepo"]
+      },
+      {
+        "id": "UninstallSearch",
+        "type": "PrefixScript",
+        "prefix": "uninstall",
+        "space": false,
+        "args": "Optional",
+        "script": "src/list.js",
+        "connections": ["UninstallPlugin"]
+      },
+      {
+        "id": "ListSearch",
+        "type": "PrefixScript",
+        "prefix": "list",
+        "space": false,
+        "args": "Optional",
+        "script": "src/list.js",
+        "connections": ["GotoRepo"]
+      },
+      {
+        "id": "ShowConfig",
+        "type": "PrefixScript",
+        "prefix": "config",
+        "space": false,
+        "args": "None",
+        "script": "src/showConfig.js",
+        "connections": ["ShowFile"]
+      },
+      {
+        "id": "OpenConfig",
+        "type": "PrefixScript",
+        "prefix": "config",
+        "space": false,
+        "args": "None",
+        "script": "src/openConfig.js",
+        "connections": ["OpenFile"]
+      }
+    ],
+    "output": [
+      {
+        "id": "GotoRepo",
+        "type": "OpenInBrowser",
+        "url": "https://github.com/{value}"
+      },
+      {
+        "id": "InstallPlugin",
+        "type": "UserScript",
+        "script": "src/installPlugin.js",
+        "connections": ["Notify"]
+      },
+      {
+        "id": "UninstallPlugin",
+        "type": "UserScript",
+        "script": "src/uninstallPlugin.js",
+        "connections": ["Notify"]
+      },
+      {
+        "id": "Notify",
+        "type": "SendNotification",
+        "title": "Packages Updated",
+        "message": "Your packages have been updated. Reload your configuration to see your changes.",
+        "connections": ["Reload"]
+      },
+      {
+        "id": "ShowFile",
+        "type": "ShowFile"
+      },
+      {
+        "id": "OpenFile",
+        "type": "OpenFile"
+      },
+      {
+        "id": "Reload",
+        "type": "ReloadConfig"
+      }
+    ]
+  }
+}
