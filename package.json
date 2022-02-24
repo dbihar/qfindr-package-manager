@@ -17,8 +17,8 @@
     "mocha": "^2.5.3"
   },
   "dependencies": {
-    "fuzzyfind": "^2.0.0",
-    "node-fetch": "^1.6.3",
-    "rimraf": "^2.6.1"
+    "fuzzyfind": "^2.1.0",
+    "node-fetch": "^1.7.3",
+    "rimraf": "^2.7.1"
   }
 }
