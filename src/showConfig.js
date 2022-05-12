@@ -6,7 +6,7 @@ module.exports = (pluginContext) => {
       resolve([
         {
           icon: 'fa-file-text',
-          title: 'Show Zazu Configuration',
+          title: 'Show q-findr Configuration',
           value: configPath,
         },
       ])

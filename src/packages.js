@@ -1,4 +1,5 @@
 const http = require('http')
+const { resolve } = require('path')
 
 const packageUrl = 'http://zazuapp.org/api/packages.json'
 let packages = null
@@ -15,11 +16,20 @@ const self = {
           packages = JSON.parse(chunks.join('')).packages
           resolve(packages)
         })
-      })
-    })
+      }).on('error', function (err) {
+        console.log(err);
+      });
+    }).on('error', function (err) {
+      console.log(err);
+    });
   },
   get: (cwd) => {
-    return packages ? Promise.resolve(packages) : self.refresh(cwd)
+    try{
+      return packages ? Promise.resolve(packages) : self.refresh(cwd)
+    }catch{
+      console.info('Cant get all packages from net')
+      return
+    }
   },
 }
 

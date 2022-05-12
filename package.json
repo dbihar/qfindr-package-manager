@@ -1,7 +1,7 @@
 {
-  "name": "zazu-package-manager",
+  "name": "q-findr-package-manager",
   "version": "1.0.0",
-  "description": "Simple package manager for Zazu.",
+  "description": "Simple package manager for q-findr.",
   "main": "zazu.json",
   "scripts": {
     "lint": "eslint .",
